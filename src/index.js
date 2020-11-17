@@ -44,6 +44,9 @@ const MainStack = createStackNavigator(
     },
    
   },
+  {
+    initialRouteName:"Login"
+  }
 );
 
 const Container = createAppContainer(MainStack);

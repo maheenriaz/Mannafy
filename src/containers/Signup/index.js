@@ -7,7 +7,7 @@ class Signup extends React.Component {
     return (
       <View style={styles.main}>
           <View style={{marginTop:moderateScaleVertical(80),alignSelf:'center'}}>
-              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold',fontFamily:"Fondamento-Regular"}}>M A A N A F Y</Text>
+              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A N N A F Y</Text>
           </View>
             <View style={{alignSelf:'center'}}>
                 <View style={{flexDirection:'column'}}>

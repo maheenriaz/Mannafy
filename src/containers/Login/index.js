@@ -8,13 +8,27 @@ class Login extends React.Component {
     return (
       <View style={styles.main}>
           <View style={{marginTop:moderateScaleVertical(140),alignSelf:'center'}}>
-              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold',fontFamily:"Ariel"}}>M A A N A F Y</Text>
+              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A A N A F Y</Text>
           </View>
-            <View style={{alignSelf:'center'}}>
+            <View style={{alignSelf:'center',marginTop:moderateScaleVertical(38)}}>
                 <View style={{flexDirection:'row'}}>
-                <TextInput icon="login" mode="contained" placeholder="Enter Email" style={{paddingLeft:17,fontSize:textScale(17),marginTop:moderateScaleVertical(38),width:280,height:44,borderRadius:26,borderColor:'black',backgroundColor:'white',elevation:2}}/>
+                <TextInput
+                  icon="login"
+                  mode="contained"
+                  placeholder="Enter Email"
+                  placeholderTextColor="grey"
+                  style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'black',borderWidth:1,backgroundColor:'white',elevation:2}}
+                  underlineColorAndroid="transparent"
+                />
                 </View>
-               <TextInput placeholder="Enter Password" style={{paddingLeft:17,fontSize:textScale(17),marginTop:moderateScaleVertical(26),width:280,height:44,borderRadius:26,borderColor:'black',backgroundColor:'white',elevation:2}}/>
+                <View style={{flexDirection:'row',marginTop:moderateScaleVertical(26)}}>
+               <TextInput
+                underlineColorAndroid="transparent"
+                placeholder="Enter Password"
+                placeholderTextColor="grey"
+               style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'black',borderWidth:1,backgroundColor:'white',elevation:2}}
+               />
+                </View>
            </View>  
 
            <View style={{marginTop:moderateScaleVertical(30),width:270,color:'green',alignSelf:'center'}}>

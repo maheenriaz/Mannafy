@@ -15,7 +15,7 @@ class ConfirmEntry extends React.Component {
     ]
     return (
       <View style={styles.main}>
-          <HeaderCustom />
+          <HeaderCustom onPressBack={()=>this.props.navigation.goBack()}/>
         <Text style={{fontSize:20,padding:10,alignSelf:'center'}}>Confirm your entry below for a chance to win.</Text>
         <View style={{elevation:1,borderColor:'#E4E4E4',borderWidth:1}}> 
                 <View style={{padding:30}} >

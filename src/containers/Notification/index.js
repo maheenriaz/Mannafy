@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet,FlatList, Linking,TouchableOpacity,Button,Image} from 'react-native';
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Icon} from '../../config'
 
 class Notification extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class Notification extends React.Component {
       ]
     return (
       <View style={styles.main}>
-          <HeaderCustom />
+          <HeaderCustom menu/>
         <Text style={{fontSize:textScale(20),padding:10}}>Notifications</Text>
         <FlatList 
               data={product}
@@ -35,7 +35,7 @@ class Notification extends React.Component {
                       
               {item.confirm_entry == "Confirm Entry   " ? <TouchableOpacity onPress={()=> this.props.navigation.navigate("ConfirmEntry",{item})}><Text style={{fontSize:textScale(19),color:'grey'}}>{item.confirm_entry}</Text></TouchableOpacity> : <TouchableOpacity onPress={()=> this.props.navigation.navigate("WinnerAnouncement",{item})}><Text style={{fontSize:textScale(19),color:'grey'}}>{item.winner}</Text></TouchableOpacity> }  
                      
-                    <Icon name="arrow-forward-ios" style={{marginLeft:moderateScaleVertical(-10),marginTop:moderateScaleVertical(3)}}  size={17} color="black"  />
+                    <Icon family="MaterialIcons" name="arrow-forward-ios" style={{marginLeft:moderateScaleVertical(-10),marginTop:moderateScaleVertical(3)}}  size={17} color="black"  />
                     </View>
                     </View>
                 );
