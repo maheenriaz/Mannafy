@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,AsyncStorage} from 'react-native';
+import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,AsyncStorage,ActivityIndicator} from 'react-native';
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
 import auth from '@react-native-firebase/auth'
@@ -9,36 +9,45 @@ class Login extends React.Component {
   state={
     email:'',
     password:'',
+    loader:false
    }
 
-
-   userLogin(email,password){
+  userLogin(email,password){
     console.log(this.state)
   auth().signInWithEmailAndPassword(email, password)
     .then(async(user)=>{
+      this.setState({loader:true})
      console.log("user", JSON.stringify(user.user.uid) )
       const userinfo=JSON.stringify(user.user)
         await AsyncStorage.setItem('list',userinfo)
+        this.setState({loader:false})
       this.props.navigation.navigate("Product", userinfo)     
     }) 
     .catch((err)=>{
         Alert.alert(err.message)
+        this.setState({loader:false})
     })
 }
 
-// ForgetPassword(){
-//   Alert.alert("Enter email")
-//   const emailAddress = this.state.email;
-//   console.log(emailAddress);
-//   auth().sendPasswordResetEmail(emailAddress).then(function() {
-//     console.log("Email sent");
-//   }).catch(function(error) {
-//     console.log(error.message);
-//   });
-// }
+componentDidMount(){
+  AsyncStorage.getItem('list').then((email) => {
+    if(email || email != null){
+      console.log(email)
+         this.props.navigation.navigate("Product")
+     }
+    else{
+      this.props.navigation.navigate("Login")
+    }
+});
+}
   render() {
+    const {loader} = this.state
     return (
       <View style={styles.main}>
+         {loader ? <View style={{position:"absolute",top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
+          <ActivityIndicator size="large" color="black"  />
+          </View>:null 
+         }
           <View style={{marginTop:moderateScaleVertical(140),alignSelf:'center'}}>
               <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A A N A F Y</Text>
           </View>
@@ -49,7 +58,7 @@ class Login extends React.Component {
                   mode="contained"
                   placeholder="Enter Email"
                   placeholderTextColor="grey"
-                  style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white',elevation:2}}
+                  style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white'}}
                   underlineColorAndroid="transparent"
                   value={this.state.email} onChangeText={(text)=> this.setState({email:text})}
                 />
@@ -59,7 +68,8 @@ class Login extends React.Component {
                 underlineColorAndroid="transparent"
                 placeholder="Enter Password"
                 placeholderTextColor="grey"
-               style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white',elevation:2}}
+               style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white'}}
+               secureTextEntry={true}
                value={this.state.password} onChangeText={(text)=> this.setState({password:text})}
               />
                 </View>

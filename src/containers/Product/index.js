@@ -3,24 +3,32 @@ import {View, Text, StyleSheet, Linking, Animated,Image,PanResponder,FlatList,Di
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
 import SwipeCards from 'react-native-swipe-cards';
+import firestore from '@react-native-firebase/firestore'
 
 class Card extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-    render() {
-      return (
-        <View style={styles.card}>
-            <View style={{elevation:1,borderColor:'#CBCBCB',borderWidth:1}}> 
-                <View style={{padding:30}} >
-                <Image style={{width:'100%',height:270,resizeMode:'stretch'}} source={{uri:this.props.image}} />
-                <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>{this.props.product_name}</Text>
-                <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>{this.props.product_value}</Text>
-                <Text style={{color:'#484747',margin:moderateScaleVertical(10)}}>{this.props.product_description}</Text>
-                <Text></Text>
-                </View>
-            </View>
-        </View>
+  state={
+    giveaway:[]
+  }
+  render() {
+     firestore().collection("giveaway")
+        .onSnapshot((querySnapshot)=> {
+          const alldata=[]
+            querySnapshot.forEach((doc)=> {
+              alldata.push(doc.data())  
+            });
+          this.setState({giveaway:alldata})
+        })
+    return (
+          <View style={styles.card} >
+              <View style={{elevation:1,borderColor:'#CBCBCB',borderWidth:1}}> 
+                  <View style={{padding:30}}>
+                  <Image style={{width:'100%',height:270,resizeMode:'stretch'}} source={{uri:this.props.image}} />
+                  <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>fsddddddddddddddddddddddddddddddddddddddddddddddddddddddd</Text>
+                  <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>$3234</Text>
+                  <Text style={{color:'#484747',margin:moderateScaleVertical(10)}}>vdsssssssssssssssssssssssssssssssssss</Text>
+                  </View>
+              </View>
+         </View>  
       )
     }
   }
@@ -49,7 +57,6 @@ class Card extends React.Component {
     {image: 'https://www.apa.org/images/holiday-gifts-title-image_tcm7-226231.jpg',product_name:'Product Name',product_value:'Product ARV Value',product_description:'Product description RVW value edeed  deeded eded dede eddeed ededede de deededde deeded edeedde ededdddddddddddddddddddddddd ededededde de eded ed ed ed eded e ed deffe e fe f'},
     {image:'https://parsgiftgallery.com/wp-content/uploads/2019/08/022-1.jpg',product_name:'rgerggrgrrwe',product_value:'ffegfg',product_description:'Product description RVW value edeed  deeded eded dede eddeed ededede de deededde deeded edeedde ededdddddddddddddddddddddddd ededededde de eded ed ed ed eded e ed deffe e fe f'},
     {image:'https://i.ytimg.com/vi/4gFiy5_liSA/maxresdefault.jpg',product_name:'efwmfkmwe',product_value:'Product ARV Value',product_description:'Product description RVW value edeed  deeded eded dede eddeed ededede de deededde deeded edeedde ededdddddddddddddddddddddddd ededededde de eded ed ed ed eded e ed deffe e fe f'},
- 
   ]
   
   export default class Product extends React.Component {

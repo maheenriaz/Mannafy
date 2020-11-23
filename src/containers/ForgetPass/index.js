@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,AsyncStorage} from 'react-native';
+import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,AsyncStorage, ActivityIndicator} from 'react-native';
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
 import auth from '@react-native-firebase/auth'
@@ -9,19 +9,27 @@ class ForgetPass extends React.Component {
   state={
     email:'',
     password:'',
+    loader:false
    }
 ForgetPassword(email){
-  const emailAddress = email;
-  console.log(emailAddress);
-  auth().sendPasswordResetEmail(emailAddress).then(function() {
-    console.log("Email sent");
-  }).catch(function(error) {
+ auth().sendPasswordResetEmail(email).then(()=> {
+    this.setState({loader:true})
+   Alert.alert(`Email sent at ${email}`)
+    this.setState({loader:false})
+    this.props.navigation.navigate("Login")
+  })
+  .catch((error)=> {
     console.log(error.message);
+    this.setState({loader:false})
   });
 }
   render() {
+    const {loader} = this.state
     return (
       <View style={styles.main}>
+        {loader ? <View style={{position:"absolute",top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
+          <ActivityIndicator size="large" color="white" />
+            </View>:null}
           <View style={{marginTop:moderateScaleVertical(140),alignSelf:'center'}}>
               <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>Enter Your Email</Text>
           </View>
