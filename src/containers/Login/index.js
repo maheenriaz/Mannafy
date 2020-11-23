@@ -9,7 +9,8 @@ class Login extends React.Component {
   state={
     email:'',
     password:'',
-    loader:false
+    loader:false,
+    checkUser:true,
    }
 
   userLogin(email,password){
@@ -33,23 +34,28 @@ componentDidMount(){
   AsyncStorage.getItem('list').then((email) => {
     if(email || email != null){
       console.log(email)
-         this.props.navigation.navigate("Product")
-     }
+      this.props.navigation.navigate("Product")
+      this.setState({checkUser:false})
+    }
     else{
-      this.props.navigation.navigate("Login")
+      this.setState({checkUser:false})
     }
 });
 }
   render() {
-    const {loader} = this.state
+    const {loader,checkUser} = this.state
+    if(checkUser)
+    return  <View style={{position:"absolute",zIndex:99,justifyContent:'center',top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
+    <ActivityIndicator size="large" color="black"  />
+    </View>
     return (
       <View style={styles.main}>
-         {loader ? <View style={{position:"absolute",top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
+         {loader ? <View style={{position:"absolute",zIndex:99,justifyContent:'center',top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
           <ActivityIndicator size="large" color="black"  />
           </View>:null 
          }
           <View style={{marginTop:moderateScaleVertical(140),alignSelf:'center'}}>
-              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A A N A F Y</Text>
+              <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A N N A F Y</Text>
           </View>
             <View style={{alignSelf:'center',marginTop:moderateScaleVertical(38)}}>
                 <View style={{flexDirection:'row'}}>

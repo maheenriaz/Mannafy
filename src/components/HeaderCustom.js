@@ -42,6 +42,7 @@ class HeaderCustom extends React.Component {
     this._menu.show();
   };
  render(){
+   const {title,onPressBack} = this.props;
    return (
     <View style={{width:'100%'}}>
       <StatusBar barStyle="dark-content" translucent/>
@@ -56,9 +57,9 @@ class HeaderCustom extends React.Component {
           <MenuItem onPress={this.hideMenu}>Logout</MenuItem>
           <MenuDivider />
         </Menu>
-        :<Icon name="ios-arrow-back" family="Ionicons" onPress={this.props.onPressBack} />}
+        :<TouchableOpacity onPress={onPressBack}><Icon name="ios-arrow-back" family="Ionicons" /></TouchableOpacity>}
         </View>
-      <Text style={{fontSize:textScale(20)}}>{this.props.noti}</Text>
+      <Text style={{fontSize:textScale(20)}}>{title ? title : "Mannafy"}</Text>
        <View/>
        </View>
    </View>

@@ -55,7 +55,7 @@ const MainStack = createStackNavigator(
     },
   },
   {
-    initialRouteParams:"Signup"
+    initialRouteName:"Product"
   }
 );
 

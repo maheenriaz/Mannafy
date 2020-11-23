@@ -21,28 +21,32 @@ class Signup extends React.Component {
     loader:false
   }
   
-  userSignup(email,password){
+  userSignup = () =>{
+    const {fname,lname,password,phone,city,state,zip,address1,address2,email,re_enter_pass} = this.state
+    if(password !== re_enter_pass) return alert("Passwords doesn't match")
+    this.setState({loader:true})
     auth().createUserWithEmailAndPassword(email, password)
     .then(async(user)=>{
-       let details = {}
-        details.email = email
-        details.uid = user.user.uid
-        details.fname = this.state.fname
-        details.lname = this.state.lname
-        details.phone = this.state.phone
-        details.city = this.state.city
-        details.state = this.state.state
-        details.zip = this.state.zip
-        details.address1 = this.state.address1
-        details.address2= this.state.address2
-        details.password= this.state.password
+       let details = {
+        email,
+        uid : user.user.uid,
+        fname ,
+        lname ,
+        phone ,
+        city,
+        state ,
+        zip,
+        address1,
+        address2,
+        password
+       }
 
       firestore().collection("users").doc(user.user.uid)
        .set({
            details
        })                                                                  
       .then((data)=>{
-         this.setState({loader:true})
+         
          console.log(data)
          this.setState({loader:false})
          this.props.navigation.navigate("Login")
@@ -51,16 +55,17 @@ class Signup extends React.Component {
             console.log(err.message)
             this.setState({loader:false})
           })
-    } ) 
-     .catch((err)=>{
-        Alert.alert(err.message)
+        } ) 
+        .catch((err)=>{
+          this.setState({loader:false})
+          Alert.alert(err.message)
     })
   }
   render() {
     const {loader} = this.state
     return (
       <View style={styles.main}>
-         {loader ? <View style={{position:"absolute",top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
+         {loader ? <View style={{position:"absolute",zIndex:99,justifyContent:'center',top:0,bottom:0,right:0,left:0,backgroundColor:'rgba(0,0,0,0.5)'}}>
           <ActivityIndicator size="large" color="black"  />
           </View>:null 
          }
@@ -177,7 +182,7 @@ class Signup extends React.Component {
             </View>  
 
            <View style={{marginTop:moderateScaleVertical(30),width:270,color:'green',alignSelf:'center'}}>
-               <TouchableOpacity onPress={()=> this.userSignup(this.state.email,this.state.password)}>
+               <TouchableOpacity onPress={this.userSignup}>
                         <View style={{borderWidth:1,borderRadius:30,borderColor:'blue',height:37}}>
                             <Text style={{alignSelf:'center',marginTop:moderateScaleVertical(8),fontSize:textScale(17),color:"grey"}}>Signup</Text>
                             </View>

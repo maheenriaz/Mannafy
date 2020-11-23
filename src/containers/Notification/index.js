@@ -13,7 +13,7 @@ class Notification extends React.Component {
       ]
     return (
       <View style={styles.main}>
-          <HeaderCustom menu noti="Notifications" navigation={this.props.navigation}/>
+          <HeaderCustom onPressBack={()=>this.props.navigation.goBack()} title="Notifications" navigation={this.props.navigation}/>
         <FlatList 
               data={product}
               showsVerticalScrollIndicator={false}
