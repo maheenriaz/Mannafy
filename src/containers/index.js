@@ -7,8 +7,10 @@ import Notification from './Notification'
 import ConfirmEntry from './ConfirmEntry'
 import WinnerAnouncement from './WinnerAnouncement'
 import RevealPrize from './RevealPrize'
+import ForgetPass from './ForgetPass'
+
 
 
 export {
-   Product,Login,Signup,Responsive,Notification,ConfirmEntry,WinnerAnouncement,RevealPrize
+   Product,Login,Signup,Responsive,Notification,ConfirmEntry,WinnerAnouncement,RevealPrize,ForgetPass
 }

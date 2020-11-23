@@ -16,18 +16,18 @@ class WinnerAnouncement extends React.Component {
     return (
       <View style={styles.main}>
           <HeaderCustom onPressBack={()=>this.props.navigation.goBack()} />
-        <Text style={{fontSize:20,padding:10,alignSelf:'center'}}>Confirm below to see if you're a winner.</Text>
+        <Text style={{fontSize:textScale(20),padding:10,alignSelf:'center'}}>Confirm below to see if you're a winner.</Text>
         <View style={{elevation:1,borderColor:'#E4E4E4',borderWidth:1}}> 
                 <View style={{padding:30}} >
                   {console.log(item.product_description,"hehhhhhhhhhhhhhhhhhhhh")}
                 <Image style={{width:'100%',height:270,resizeMode:'stretch'}} source={{uri:item.image}} />
-                  <Text style={{fontSize:20,color:'grey',marginTop:8,fontWeight:'bold',margin:10}}>{item.product_name}</Text>
-                  <Text style={{fontSize:14,color:'grey',marginTop:2,margin:10}}>{item.product_value}</Text>
-                  <Text style={{color:'#484747',margin:10}}>{item.product_description}</Text>
+                  <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>{item.product_name}</Text>
+                  <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>{item.product_value}</Text>
+                  <Text style={{color:'#484747',margin:moderateScaleVertical(10)}}>{item.product_description}</Text>
                
                <TouchableOpacity onPress={()=> this.props.navigation.navigate("RevealPrize")}>
                   <View style={{height:40,width:300,borderWidth:1,borderColor:'#209E0A',borderRadius:7,alignSelf:'center',backgroundColor:'#209E0A'}}>
-                    <Text style={{alignSelf:'center',marginTop:7,color:'white',fontSize:18}}>Reveal your Price!</Text>
+                    <Text style={{alignSelf:'center',marginTop:moderateScaleVertical(7),color:'white',fontSize:textScale(18)}}>Reveal your Price!</Text>
                 </View>
                </TouchableOpacity>
                 </View>

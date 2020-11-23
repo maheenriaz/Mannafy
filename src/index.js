@@ -2,8 +2,29 @@
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 //Screens
-import {Product,Login,Signup,Responsive,Notification,ConfirmEntry,WinnerAnouncement,RevealPrize} from './containers';
+import {Product,Login,Signup,Responsive,Notification,ConfirmEntry,WinnerAnouncement,RevealPrize,ForgetPass} from './containers';
 
+const LoginStack = createStackNavigator(
+  {
+    Login: {screen: Login,
+      navigationOptions: {
+        headerShown: false
+      },
+    },
+    ForgetPass: {screen: ForgetPass,
+      navigationOptions: {
+        headerShown: false
+      },
+    },
+  })
+  const SignupStack = createStackNavigator(
+    {
+      Signup: {screen: Signup,
+        navigationOptions: {
+          headerShown: false
+        },
+      },
+    })
 const MainStack = createStackNavigator(
   {
    
@@ -27,29 +48,26 @@ const MainStack = createStackNavigator(
         headerShown: false
       },
     },
-    Login: {screen: Login,
-      navigationOptions: {
-        headerShown: false
-      },
-    },
-    Signup: {screen: Signup,
-      navigationOptions: {
-        headerShown: false
-      },
-    },
      Product: {screen: Product,
       navigationOptions: {
         headerShown: false
       },
     },
-   
   },
   {
-    initialRouteName:"Login"
+    initialRouteParams:"Signup"
   }
 );
 
-const Container = createAppContainer(MainStack);
 
+const RootStack = createAppContainer(
+  createSwitchNavigator(
+    {
+      Login: LoginStack,
+      Signup: SignupStack,
+       App: MainStack,
+    },
+  ),
+);
 
-export default Container;
+export default RootStack;

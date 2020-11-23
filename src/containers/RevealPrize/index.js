@@ -8,7 +8,8 @@ class RevealPrize extends React.Component {
   render() {
     return (
       <View style={styles.main}>
-       <View style={{elevation:1,borderColor:'#E4E4E4',borderWidth:1}}> 
+          <HeaderCustom onPressBack={()=>this.props.navigation.goBack()} noti="Reveal Price"/>
+       <View style={{elevation:1,borderColor:'#D5D5D5',marginTop:moderateScaleVertical(40)}}> 
                 <View style={{padding:30}}>
                   <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>Congratulations!</Text>
                   <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>You've won the grand prize! Enter you name and email address below and the sponsor will reach out to you directly within the next week.</Text>
@@ -17,7 +18,7 @@ class RevealPrize extends React.Component {
             </View>
        </View>
          
-       <View style={{elevation:1,borderColor:'#E4E4E4',borderWidth:1}}> 
+       <View style={{elevation:1,borderColor:'#D5D5D5',marginTop:moderateScaleVertical(40)}}> 
                 <View style={{padding:30}} >
                   <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>You won a coupon code!</Text>
                   <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>Although you you did'nt win the grand price, you have won access to a coupon code worth 20% of your next order if used by 12/31/2020. Jump on over to our website now to see how you could spent this coupon.</Text>

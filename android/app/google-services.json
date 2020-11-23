@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "748151473104",
+    "firebase_url": "https://mannafy-db6d6.firebaseio.com",
+    "project_id": "mannafy-db6d6",
+    "storage_bucket": "mannafy-db6d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748151473104:android:cbb951c7bab0fed48cefd5",
+        "android_client_info": {
+          "package_name": "com.mannafy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748151473104-jgj2314eq6tae1cl3fpbn5bg8noiicga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeLRowwfpCoYVsphhkX7VOFkMDzQbRFVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748151473104-jgj2314eq6tae1cl3fpbn5bg8noiicga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

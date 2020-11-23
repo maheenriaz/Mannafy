@@ -1,9 +1,41 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button} from 'react-native';
+import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,AsyncStorage} from 'react-native';
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 class Login extends React.Component {
+  state={
+    email:'',
+    password:'',
+   }
+
+
+   userLogin(email,password){
+    console.log(this.state)
+  auth().signInWithEmailAndPassword(email, password)
+    .then(async(user)=>{
+     console.log("user", JSON.stringify(user.user.uid) )
+      const userinfo=JSON.stringify(user.user)
+        await AsyncStorage.setItem('list',userinfo)
+      this.props.navigation.navigate("Product", userinfo)     
+    }) 
+    .catch((err)=>{
+        Alert.alert(err.message)
+    })
+}
+
+// ForgetPassword(){
+//   Alert.alert("Enter email")
+//   const emailAddress = this.state.email;
+//   console.log(emailAddress);
+//   auth().sendPasswordResetEmail(emailAddress).then(function() {
+//     console.log("Email sent");
+//   }).catch(function(error) {
+//     console.log(error.message);
+//   });
+// }
   render() {
     return (
       <View style={styles.main}>
@@ -17,8 +49,9 @@ class Login extends React.Component {
                   mode="contained"
                   placeholder="Enter Email"
                   placeholderTextColor="grey"
-                  style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'black',borderWidth:1,backgroundColor:'white',elevation:2}}
+                  style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white',elevation:2}}
                   underlineColorAndroid="transparent"
+                  value={this.state.email} onChangeText={(text)=> this.setState({email:text})}
                 />
                 </View>
                 <View style={{flexDirection:'row',marginTop:moderateScaleVertical(26)}}>
@@ -26,19 +59,23 @@ class Login extends React.Component {
                 underlineColorAndroid="transparent"
                 placeholder="Enter Password"
                 placeholderTextColor="grey"
-               style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'black',borderWidth:1,backgroundColor:'white',elevation:2}}
-               />
+               style={{paddingLeft:17,fontSize:textScale(17),width:280,height:44,borderRadius:26,borderColor:'#5B5B5B',borderWidth:1,backgroundColor:'white',elevation:2}}
+               value={this.state.password} onChangeText={(text)=> this.setState({password:text})}
+              />
                 </View>
            </View>  
 
            <View style={{marginTop:moderateScaleVertical(30),width:270,color:'green',alignSelf:'center'}}>
-               <TouchableOpacity onPress={()=> this.props.navigation.navigate("Product")}>
+               <TouchableOpacity  onPress={()=>this.userLogin(this.state.email,this.state.password)} >
                         <View style={{borderWidth:1,borderRadius:30,borderColor:'blue',height:37}}>
                             <Text style={{alignSelf:'center',marginTop:moderateScaleVertical(8),fontSize:17,color:"grey"}}>Login</Text>
                             </View>
                </TouchableOpacity>
                <TouchableOpacity onPress={()=> this.props.navigation.navigate("Signup")}>
-                   <Text style={{alignSelf:'center',fontSize:textScale(17),fontWeight:'bold',marginTop:moderateScaleVertical(3),color:'grey'}}>Create an Account ?</Text>
+                   <Text style={{alignSelf:'center',fontSize:textScale(17),fontWeight:'bold',marginTop:moderateScaleVertical(3),color:'grey'}}>Create an Account ? or</Text>
+                 </TouchableOpacity>
+                  <TouchableOpacity onPress={()=> this.props.navigation.navigate("ForgetPass",this.state.email)}>
+                   <Text style={{alignSelf:'center',fontSize:textScale(14),fontWeight:'bold',marginTop:moderateScaleVertical(3),color:'grey'}}>Forget Password</Text>
                  </TouchableOpacity>
           </View>
       </View>
