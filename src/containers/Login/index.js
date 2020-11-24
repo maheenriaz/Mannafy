@@ -14,10 +14,11 @@ class Login extends React.Component {
    }
 
   userLogin(email,password){
+    this.setState({loader:true})
     console.log(this.state)
   auth().signInWithEmailAndPassword(email, password)
     .then(async(user)=>{
-      this.setState({loader:true})
+      
      console.log("user", JSON.stringify(user.user.uid) )
       const userinfo=JSON.stringify(user.user)
         await AsyncStorage.setItem('list',userinfo)

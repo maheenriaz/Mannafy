@@ -28,15 +28,16 @@ class HeaderCustom extends React.Component {
     }
     this._menu.hide();
   };
-  userLogout(){
+  userLogout = () => {
     auth().signOut()
     .then(()=>{
        AsyncStorage.removeItem('list',()=>{
         this.setState({logout:false});
          console.log("deleted")
-       });
+       })
+       
       this.props.navigation.navigate("Login")
-    })
+    }).catch((err)=>alert(JSON.stringify(err)))
   }
   showMenu = () => {
     this._menu.show();

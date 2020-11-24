@@ -7,21 +7,19 @@ import firestore from '@react-native-firebase/firestore'
 
 class Notification extends React.Component {
   state={
-    notifications:''
+    notifications:[]
   }
   componentDidMount(){
     AsyncStorage.getItem('list').then((user) => {
       user = JSON.parse(user)
       this.setState({uid:user.uid})
-    });
-    firestore().collection("notifications")
-    .onSnapshot((querySnapshot) =>{
-      var alldata=[]
-        querySnapshot.forEach((doc)=> {
-         alldata.push(doc.data().accepted)
-         this.setState({notifications:alldata})
+      firestore().collection("notifications").doc(user.uid)
+      .onSnapshot((doc) =>{
+        if(doc.exists)
+          {const notifications = doc.data()?.accepted ? doc.data()?.accepted : []
+        this.setState({notifications})}
       })
-    })
+    });
   }
   render() {
     const {notifications}=this.state
@@ -30,6 +28,7 @@ class Notification extends React.Component {
         {image:'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',company_name:'Company Name',product_name:'Product Name',confirm_entry:'Confirm Entry   '},
         {image:'https://programminginsider.com/wp-content/uploads/2020/08/gift-7.jpg',company_name:'Company Name',product_name:'Product Name',winner:'Winner Announcement   '},
       ]
+      console.log(notifications,"notis")
     return (
       <View style={styles.main}>
           <HeaderCustom onPressBack={()=>this.props.navigation.goBack()} title="Notifications" navigation={this.props.navigation}/>
@@ -41,19 +40,18 @@ class Notification extends React.Component {
               renderItem={({item,index})=>{
                 return(
                     <View style={{marginTop:moderateScaleVertical(10)}}>
-                      {console.log({item},'ooooooooooooooo')}
                      <View style={{borderWidth:0.4,borderColor:'#C9C9C9'}}></View>
                       <TouchableOpacity onPress={()=> this.props.navigation.navigate("ConfirmEntry",{item})}>
                           <View style={{padding:10,flexDirection:'row'}}>
-                          <Image style={{width:'20%',height:70,resizeMode:'stretch'}} source={{uri:item[index].giveawayImage}} />
+                          <Image style={{width:'20%',height:70,resizeMode:'stretch'}} source={{uri:item?.giveawayImage}} />
                               <View style={{marginLeft:moderateScaleVertical(9)}}>
-                                  <Text style={{fontSize:textScale(20)}}>{item[index].giveawayName}</Text>
-                                  <Text style={{fontSize:textScale(16),color:'grey'}}>{item.item.arv}</Text>
+                                  <Text style={{fontSize:textScale(20)}}>{item?.giveawayName}</Text>
+                                  <Text style={{fontSize:textScale(16),color:'grey'}}>{item?.arv}</Text>
                                </View>
                          </View>
-                    <View style={{flexDirection:'row',alignSelf:'flex-end'}}>
-                         <Text style={{fontSize:textScale(19),color:'grey'}}>{item.confirm_entry}</Text>
-                        <Icon family="MaterialIcons" name="arrow-forward-ios" style={{marginLeft:moderateScaleVertical(-10),marginTop:moderateScaleVertical(3)}}  size={17} color="black"  />
+                    <View style={{flexDirection:'row',alignSelf:'flex-end',alignItems:'center'}}>
+                         <Text style={{fontSize:textScale(19),color:'grey'}}>{"Confirm Entry"}</Text>
+                        <Icon family="MaterialIcons" name="arrow-forward-ios" size={17} color="black"  />
                    </View>
                     </TouchableOpacity>
                 
