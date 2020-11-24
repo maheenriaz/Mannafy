@@ -13,7 +13,7 @@ class Card extends React.Component {
               <View style={{elevation:1,borderColor:'#CBCBCB',borderWidth:1}}> 
                   <View style={{padding:30}}>
                   <Image style={{width:'100%',height:270,resizeMode:'stretch'}} source={{uri:this.props.giveawayImage}} />
-                  <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}></Text>
+                  <Text style={{fontSize:textScale(20),color:'grey',marginTop:moderateScaleVertical(8),fontWeight:'bold',margin:moderateScaleVertical(10)}}>{this.props.giveawayName}</Text>
                   <Text style={{fontSize:textScale(14),color:'grey',marginTop:moderateScaleVertical(2),margin:moderateScaleVertical(10)}}>${this.props.arv}</Text>
                   <Text style={{color:'#484747',margin:moderateScaleVertical(10)}}>{this.props.giveawayDescription}</Text>
                   </View>
