@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,ScrollView,ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, Linking,TouchableOpacity,TextInput,Button,Alert,ScrollView,ActivityIndicator,KeyboardAvoidingView} from 'react-native';
 import HeaderCustom from '../../components/HeaderCustom'
 import {textScale,moderateScaleVertical}  from '../Responsive/index'
 import auth from '@react-native-firebase/auth'
@@ -73,6 +73,7 @@ class Signup extends React.Component {
           <View style={{marginTop:moderateScaleVertical(80),alignSelf:'center'}}>
               <Text style={{fontSize:textScale(27),color:'blue',fontWeight:'bold'}}>M A N N A F Y</Text>
           </View>
+          <KeyboardAvoidingView  behavior="padding">
             <View style={{alignSelf:'center'}}>
                 <View style={{flexDirection:'column'}}>
                   <TextInput
@@ -180,7 +181,7 @@ class Signup extends React.Component {
                   value={this.state.re_enter_pass} onChangeText={(text)=> this.setState({re_enter_pass:text})}
                 />
             </View>  
-
+         
            <View style={{marginTop:moderateScaleVertical(30),width:270,color:'green',alignSelf:'center'}}>
                <TouchableOpacity onPress={this.userSignup}>
                         <View style={{borderWidth:1,borderRadius:30,borderColor:'blue',height:37}}>
@@ -192,8 +193,8 @@ class Signup extends React.Component {
                    <Text  style={{alignSelf:'center',fontSize:textScale(17),marginTop:moderateScaleVertical(3),color:'#5B5B5B'}}> Login</Text>
                  </TouchableOpacity>
           </View>
-        
-          <View style={{marginTop:100}}>
+          </KeyboardAvoidingView>
+          <View style={{marginTop:80}}>
             </View>
             </ScrollView>
       </View>

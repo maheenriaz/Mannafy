@@ -72,10 +72,7 @@ export default class Product extends React.Component {
         seenBy: firestore.FieldValue.arrayUnion(uid)
       })
    }
-  
-    cardRemoved (index) {
-     
-   }
+   
    componentDidMount(){
      AsyncStorage.getItem('list').then((user) => {
        user = JSON.parse(user)
@@ -114,7 +111,7 @@ export default class Product extends React.Component {
                   onClickHandler = {()=>null}
               handleYup={this.handleYup}
                   handleNope={this.handleNope}
-                  cardRemoved={this.cardRemoved.bind(this)}
+                  
             /> 
             </View>
  
