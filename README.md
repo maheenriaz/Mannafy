@@ -1,2 +1,2 @@
 # Mannafy
-<a href="https://github.com/maheenriaz/Home-AR/blob/main/ezgif.com-gif-maker%20(2).gif"><img src="https://github.com/maheenriaz/Home-AR/blob/main/ezgif.com-gif-maker%20(2).gif" title="react native"></a>
+<a href="https://github.com/maheenriaz/Mannafy/blob/master/ezgif.com-gif-maker%20(6).gif"><img src="https://github.com/maheenriaz/Mannafy/blob/master/ezgif.com-gif-maker%20(6).gif" title="react native"></a>
